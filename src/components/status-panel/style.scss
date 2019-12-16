@@ -1,0 +1,19 @@
+.panel-container{
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.loading{
+      background: rgba(97, 136, 176, 0.48);
+    }
+    &.fail{
+      background: #eee;
+    }
+    &.success{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      background: rgba(97, 136, 176, 0.48);
+    }
+}
