@@ -49,3 +49,18 @@ html, body, #root, .app{
   .ant-menu-item:hover,.ant-menu-submenu-selected:hover{
     color:$primary-color;
   }
+
+
+  .filtration{
+    display:flex;
+    .filter-icon{
+        font-size:20px;
+        line-height: 32px;
+        padding:0 10px
+    }
+    .ant-input-search,.ant-select,.select-time{
+        flex:1;
+        margin-right:10px;
+        height: 30px;
+    }
+}
