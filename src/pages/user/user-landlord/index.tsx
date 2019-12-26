@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-
-const FinanceService: React.FC<{}> = function FinanceService(){
-
-  return (
-    <div>
-      <h1>房东管理管理界面</h1>
-    </div>
-  )
-}
-
-export default FinanceService;
-=======
 import React,{useCallback,useEffect} from "react";
 import UserFiltration from '../../../components/user-filtration'
 import UserTable from '../../../components/user-table'
@@ -142,4 +127,3 @@ export default UserLandlord;
 
 
 
->>>>>>> hui
