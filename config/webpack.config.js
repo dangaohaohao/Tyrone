@@ -341,7 +341,7 @@ module.exports = function(webpackEnv) {
             // 'link-color': '#6188b0',
             // 'border-radius-base': '2px',
             // or
-            'hack': `true; @import "../src/style/theme-style.less";`, // Override with less file
+            'hack': `true; @import "../theme-style.less";`, // Override with less file
           },
            javascriptEnabled: true
          },
