@@ -8,11 +8,11 @@ import {useDispatch, useSelector} from 'react-redux'
 
 
 const initOpt={
-  'userSource':'',
-  'certification':'',
-  'bank':'',
-  'status':'',
-  'time':''
+  'userSource':'0',
+  'certification':'1',
+  'bank':'0',
+  'status':'0',
+  'time':'0'
 }
 
 
@@ -70,7 +70,7 @@ const cols = [
     key: 'operation',
     fixed: 'right',
     width: 150,
-    render: () => <div><a>查看</a><a>禁用</a></div>
+    render: () => <div><a >查看</a><a>禁用</a></div>
   },
 ];
 const UserLandlord: React.FC<{}> = function UserLandlord() {

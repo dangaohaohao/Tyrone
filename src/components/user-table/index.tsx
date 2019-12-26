@@ -34,8 +34,8 @@ const UserTable: React.FC<Prop> = function UserTable({ data,status,columns}) {
     hideDefaultSelections: true,
     selections: [
       {
-        key: "all-data",
-        text: "Select All Data",
+        key: "all",
+        text: "全选",
         onSelect: () => {
           let newSelectedRowKeys: any[] = [];
           newSelectedRowKeys = [Array(46).keys()];
@@ -45,7 +45,7 @@ const UserTable: React.FC<Prop> = function UserTable({ data,status,columns}) {
       },
       {
         key: "odd",
-        text: "Select Odd Row",
+        text: "选中奇数",
         onSelect: (changableRowKeys: any[]) => {
           let newSelectedRowKeys: any[] = [];
           newSelectedRowKeys = changableRowKeys.filter((key, index) => {
@@ -60,7 +60,7 @@ const UserTable: React.FC<Prop> = function UserTable({ data,status,columns}) {
       },
       {
         key: "even",
-        text: "Select Even Row",
+        text: "选中偶数",
         onSelect: (changableRowKeys: any[]) => {
           let newSelectedRowKeys: any[] = [];
           newSelectedRowKeys = changableRowKeys.filter((key, index) => {
