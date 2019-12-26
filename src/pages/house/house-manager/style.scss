@@ -1,0 +1,58 @@
+$mainColor: #6188b0;
+
+#house-landlord {
+
+  // 头部 begin
+  header {
+    display: flex;
+    flex-direction: row;
+    padding:20px 0;
+    border-bottom: 1px solid #eee;
+
+    .title {
+      font-size: 18px;
+      line-height: 60px;
+    }
+
+    .count {
+      margin-left: 50px;
+      display: flex;
+      flex-direction: row;
+
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid #666;
+        border-radius: 8px;
+        margin: 0 26px;
+        height: 60px;
+
+        span {
+          font-size: 14px;
+          color: #fff;
+          width: 50px;
+          background-color: $mainColor;
+          box-sizing: border-box;
+          padding: 10px 10px;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+
+        i {
+          padding: 0 26px;
+          display: flex;
+          font-size: 18px;
+          color: #333;
+          border-radius: 8px;
+        }
+
+      }
+    }
+  }
+  // 头部 end
+
+  
+
+}
+
