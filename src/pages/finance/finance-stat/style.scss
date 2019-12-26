@@ -1,0 +1,23 @@
+.main-fa-list{
+    margin-top: 10px;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    .main{
+        width: 300px;
+        height: 300px;
+        border:solid 1px #fcc;
+        .main-list{
+            width: 300px;
+            height: 270px;
+        }
+        .main-down{
+            width: 100%;
+            height: 30px;
+            font-weight: 600;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
+}
