@@ -36,40 +36,404 @@
 主题色：#6188b0
 ```
 
-### api
+# Tyrone 接口文档
 
+## 公共
+
+
+
+
+## 用户
+#### 用户注册  测试 ok
 ```
- /*
-      登录接口
-      参数： username  password
-    */
-    LOGIN_API = '/manager/api/login',
-    
-    
-
-   /*
-      财务统计接口
-      参数： start end type(out in) today 
-    */
-    FINANCE_STAT_API= '/manager/api/finance/stat'
-    
-    data:{
-           in: {
-              "recharge|1000-10000": 0,
-              "rent|1000-30000": 0,
-              "service|1000-8000": 0,
-              "behelf|1000-5000": 0
-            },
-            out: {
-              "deposit|1000-10000": 0,
-              "service|1000-8000": 0,
-              "behelf|1000-5000": 0
-            }
-
-      }
-    
-    
-    
-
+api:/api/user/register    
+method： post  
+参数：userInfo(obj)  
+必含参数：userName | password | tel | email | status(0:正常 | 1:删除) | mailAddress | roleType (0:管理员 | 1:Agent | 2:房东 | 3: 房客)  
+返回值： code   message   data   
 ```
+
+
+#### 用户登录  测试 ok
+```
+api:/api/user/login   
+method： post  
+参数：userName, password  
+返回值： code   message   data  
+```
+
+
+#### 用户退出登录  测试 ok
+```
+api:/api/user/logout    
+method： get  
+参数：null  
+返回值： code   message   data  
+```
+
+
+#### 根据角色 类型 查找角色用户  测试 ok
+```
+api:/api/user/findUserByRoleType    
+method： get   
+参数：roleType, skip, count   
+具体参数: roleType 0:管理员 | 1:Agent | 2:房东 | 3:房客    
+返回值： code   message   data   
+```
+
+
+#### 根据用户 id 来查找用户  测试 ok
+```
+api:/api/user/findUserById    
+method： get   
+参数：userId   
+返回值： code   message   data   
+```
+
+
+#### 根据用户 姓名 来查找用户  测试 ok
+```
+api:/api/user/findUserByName    
+method： get   
+参数：userName / skip / count / roleType   
+具体参数: roleType 0:管理员 | 1:Agent | 2:房东 | 3:房客   
+返回值： code   message   data   
+```
+
+
+<!-- #### 根据特定条件查询用户  不是
+api:/api/user/findUserByRequireMent  
+method： get
+参数：requireMent(obj)
+参数具体: 用户来源(0/1/2) / 实名认证情况(0/1/2/3) / 银行卡绑定情况(0/1) / 用户状态(0/1) / 最近登录时间 
+返回值： code   message   data -->
+
+
+#### 根据特定条件查询用户导出excel  还没有写好
+```
+api:/api/user/excel    
+method： get  
+参数：requireMent(obj)  
+<!-- 参数具体: 用户来源(0/1/2) / 实名认证情况(0/1/2/3) / 银行卡绑定情况(0/1) / 用户状态(0/1) / 最近登录时间 / type(0:房东 / 1:Agent) -->
+参数具体: 用户来源(0/1/2) | 实名认证情况(0:已认证 | 1:未认证 | 2:认证中 | 3:认证失败 ) | 用户状态(0:正常 | 1:禁用 ) | type(0:房东 | 1:Agent)  
+返回值： code   message   data   
+```
+
+
+#### 根据用户 id 来改变房东状态  测试 ok
+```
+api:/api/user/changeUserStatusByUserId    
+method： post  
+参数：userId, status(0:正常 / 1:禁用)  
+返回值： code   message   data   
+```
+
+
+#### 根据多个参数查找用户  测试 ok
+```
+api:/api/user/getUserBymultiParams     
+method： get  
+参数：roleType / userSource / certification / status / skip / count  
+具体参数:       
+roleType | 0:管理员 | 1:Agent | 2:房东 | 3: 房客   
+用户来源userSource | 0:管理员添加 | 1:IOS客户端 | 2:Android客服端    
+实名认证情况certification | 0:已认证 | 1:未认证 | 2:认证中 | 3:认证失败    
+用户状态status | 0:正常 | 1:禁用   
+返回值： code   message   data   
+```
+
+
+#### 修改用户信息  测试 ok
+```
+api:/api/user/modifyUserInfo    
+method： post  
+参数：tel | email | sex | userSource | status |  mailAddress | certification | userId  
+具体参数：  
+性别sex | 0:男 | 1:女 | 2:保密   
+用户来源userSource | 0:管理员添加 | 1:IOS客户端 | 2:Android客服端  
+用户状态status | 0:正常 | 1:禁用   
+实名认证情况certification | 0:已认证 | 1:未认证 | 2:认证中 | 3:认证失败   
+返回值： code   message   data    
+```
+
+
+#### 获取今日概述数据  测试 ok
+```
+api:/api/user/getSummaryData     
+method： get   
+参数：null     
+返回值： code   message   data      
+```
+
+
+#### 用户数据 mock  测试 ok
+```
+api:/api/user/userInfoMock    
+method： get   
+参数：roleType    
+具体参数: 0:管理员 | 1:Agent | 2:房东 | 3: 房客    
+返回值： code   message   data    
+```
+
+
+
+
+## 角色  后台用
+#### 添加角色   测试 ok    
+``` 
+api:/api/role/add   
+method： post   
+参数：roleName    
+返回值： code   message   data   
+``` 
+
+
+#### 根据角色名称查找 id   测试 ok
+```
+api:/api/role/findRoleIdByName      
+method： get    
+参数：roleName    
+返回值： code   message   data     
+```
+
+
+
+
+## 订单 
+#### 添加订单  测试 ok
+```
+api:/api/order/add    
+method： post     
+参数：
+房屋编号/houseId | 房东姓名/ownerName | 房客姓名/tenantName | Agent姓名/agentName |
+ 订单发起人/orderAuthor | 订单发起人联系方式/orderAuthorTel | 订单类型/orderType | 预约时间/appointment | 下单时间/orderTime | 订单状态/orderStatus |订单基础金额/orderMoney | 
+可选参数: 具体内容/content | 订单完成时间/orderFinishedTime | 服务人员/attendantName | orderVAT |  支付方式/payWay
+参数说明:     
+| 订单发起人/orderAuthor | 0:房东 | 1:房客 | 2:Agent | 3:平台 |
+| 订单类型/orderType | 0:管理费 | 1:年度税金 | 2:生活代缴 | 3:维修服务 | 4:清扫服务 | 5:装修费 |
+| 具体内容/content | 0:基础清洁 | 1:卫浴清洁 | 2:玻璃清洁 | 3:墙壁漏水 | 4:马桶维修 | 5:家电故障 | 6:门锁故障 | 7:代缴电费 | 8: 代缴水费 | 9:代缴物业费 | 10:代缴煤气费 | 11:其他 |
+| 订单状态/orderStatus | 0:已完成 | 1:进行中 |
+| 订单 VAT 0:6% 1:9% 2:10% 3:15% 4:20% 5:25% |
+| 支付方式/payWay | 0:WeChat | 1:银行卡 |
+返回值： code   message   data    
+```
+
+
+#### 修改订单   测试 ok
+```
+api:/api/order/modify    
+method： post     
+参数：
+订单编号/orderId | 房屋编号/houseId | 房东姓名/ownerName | 房客姓名/tenantName | Agent姓名/agentName |
+ 订单发起人/orderAuthor | 订单发起人联系方式/orderAuthorTel | 订单类型/orderType | 预约时间/appointment | 下单时间/orderTime | 订单状态/orderStatus |订单基础金额/orderMoney | 
+可选参数: 具体内容/content | 订单完成时间/orderFinishedTime | 服务人员/attendantName | orderVAT |  支付方式/payWay
+参数说明:     
+| 订单发起人/orderAuthor | 0:房东 | 1:房客 | 2:Agent | 3:平台 |
+| 订单类型/orderType | 0:管理费 | 1:年度税金 | 2:生活代缴 | 3:维修服务 | 4:清扫服务 | 5:装修费 |
+| 具体内容/content | 0:基础清洁 | 1:卫浴清洁 | 2:玻璃清洁 | 3:墙壁漏水 | 4:马桶维修 | 5:家电故障 | 6:门锁故障 | 7:代缴电费 | 8: 代缴水费 | 9:代缴物业费 | 10:代缴煤气费 | 11:其他 |
+| 订单状态/orderStatus | 0:已完成 | 1:进行中 |
+| 订单 VAT 0:6% 1:9% 2:10% 3:15% 4:20% 5:25% |
+| 支付方式/payWay | 0:WeChat | 1:银行卡 |
+返回值： code   message   data    
+```
+
+
+#### 服务订单概述   测试 ok
+```
+api:/api/order/getSummaryData     
+method： get   
+参数：null     
+返回值： code   message   data      
+```
+
+
+#### 根据订单编号搜索订单   测试 ok
+```
+api:/api/order/findOrderById   
+method： get   
+参数：orderId     
+返回值： code   message   data      
+```
+
+
+#### 根据房屋编号搜索订单   测试 ok
+```
+api:/api/order/findOrderByhouseId   
+method： get   
+参数：houseId | skip | count
+返回值： code   message   data      
+```
+
+
+#### 根据多个参数搜索订单   测试 ok
+```
+api:/api/order/findOrderByMultiParams   
+method： get   
+参数：订单类型/orderType | 支付方式/payWay | 订单状态/orderStatus | skip | count
+参数说明：
+| 订单类型/orderType | 0:管理费 | 1:年度税金 | 2:生活代缴 | 3:维修服务 | 4:清扫服务 | 5:装修费 |   
+| 支付方式/payWay | 0:WeChat | 1:银行卡 |
+| 订单状态/orderStatus | 0:已完成 | 1:进行中 |
+返回值： code   message   data      
+```
+
+
+
+## 财务
+#### 平台今日流水  测试 ok    
+```
+api:/api/finance/getAccountData    
+method： get     
+参数：begin | end | count    
+参数说明:       
+count > 0:返回 count 天数数据       
+count < 0: 返回 begin-end 之间的数据     
+返回值： code   message   data       
+返回值说明:       
+in: recharge:充值 | rent:房租缴纳 | service: 服务费用 | behelf:代缴费用     
+out: deposit:提现 | service: 服务费用支出 | behelf: 代缴费支出 
+```   
+
+
+
+
+
+## 房屋
+#### 获取今日房屋概述数据  测试 ok 
+``` 
+api:/api/house/getSummaryData      
+method： get     
+参数：null    
+返回值： code   message   data    
+返回值说明:     
+addToday: 今日新增 | houseSum: 房屋总数 | rented: 已出租 | notLet: 未出租
+```    
+
+
+#### 每日房屋出租情况  测试 ok
+```
+api:/api/house/getRentedData    
+method： get    
+参数：begin | end | count    
+参数说明:     
+count > 0:返回 count 天数数据 | 请求今天: 1   
+count < 0: 返回 begin-end 之间的数据    
+返回值： code   message   data     
+返回值说明:     
+rentedToday: 当日新增出租数量  
+```  
+
+
+#### 新增房屋   测试 ok    
+```
+api:/api/house/add    
+method： post      
+
+参数：houseName | houseAddress | 房东编号/houseOwnerId | Agent编号/AgentId | 出租状态/rentStatus | 月收租金/rental(num) | 房屋类型/houseType | 房屋楼层/buildingFloor | 房屋面积/houseArea | 房屋格局/housePattern(Obj) | 车位数量/carPark | furnitureType/家具设备 |         
+房客参数可选:当前房客编号/tenantId? | 租期/tenancy(2020-12-12)? | 付款类型/payMentType? | 租金情况/rentalStatus     
+      
+参数说明:     
+| 出租状态rentStatus | 0:已出租(需要添加房客信息) | 1:待出租 |    
+| 房屋类型houseType | 0:电梯高层 | 1:别墅 |      
+| 付款类型payMentType | 0: 押一付三 | 1: 押一付一 | 2: 半年付 | 3: 一年付 |      
+| 租金情况rentalStatus | 0: 已缴纳 | 1: 待缴纳 | 2: 已逾期 |     
+| 房屋格局housePattern: {卧室houseRoom:Number | 客厅saloon:Number | 卫浴bathroom:Number | 阳台balcony:Number} |  
+| furnitureType家具设备 0:普通 | 1:优越 | 2:高级 |    
+ roleType 0:管理员 | 1:Agent | 2:房东 | 3:房客   
+返回值： code   message   data  
+```  
+
+
+#### 修改房屋信息   测试 ok
+```
+api:/api/house/modifyHouseInfo     
+method： post      
+
+参数：房屋编号/houseId | houseName | houseAddress | 房东编号/houseOwnerId | Agent编号/AgentId | 出租状态/rentStatus | 月收租金/rental(num) | 房屋类型/houseType | 房屋楼层/buildingFloor | 房屋面积/houseArea | 房屋格局/housePattern(Obj) | 车位数量/carPark | furnitureType/家具设备 |     
+房客参数可选:当前房客编号/tenantId? | 租期/tenancy(2020-12-12)? | 付款类型/payMentType? | 租金情况/rentalStatus     
+
+参数说明:      
+| 出租状态rentStatus | 0:已出租(需要添加房客信息) | 1:待出租 |    
+| 房屋类型houseType | 0:电梯高层 | 1:别墅 |      
+| 付款类型payMentType | 0: 押一付三 | 1: 押一付一 | 2: 半年付 | 3: 一年付 |     
+| 租金情况rentalStatus | 0: 已缴纳 | 1: 待缴纳 | 2: 已逾期 |       
+| 房屋格局housePattern: {卧室houseRoom:Number | 客厅saloon:Number | 卫浴bathroom:Number | 阳台balcony:Number} |  
+| furnitureType家具设备 0:普通 | 1:优越 | 2:高级 |      
+ roleType 0:管理员 | 1:Agent | 2:房东 | 3:房客   
+返回值： code   message   data    
+```
+
+
+#### 根据房屋 id 来查找房屋  测试 ok
+```  
+api:/api/house/findHouseById        
+method： get      
+参数：houseId       
+返回值： code   message   data      
+```
+
+#### 历史租金情况  测试 ok 
+``` 
+api:/api/house/getRentalData       
+method： get      
+参数：null        
+返回值： code   message   data    
+```   
+
+
+## 首页 / 数据管理  
+#### mock 今日房屋动态   测试 ok 
+``` 
+api:/api/data/getToadyData  
+method： get   
+参数：null     
+返回值： code   message   data     
+```   
+
+
+#### mock 订单量变化趋势    测试 ok 
+``` 
+api:/api/data/getOrderData      
+method： get       
+参数：begin | end | count        
+参数说明:           
+count > 0:返回 count 天数数据          
+count < 0: 返回 begin-end 之间的数据         
+返回值： code   message   data             
+```  
+
+
+####  mock App下载量(ios)/Web UV趋势(Android)  App下载数据同接口  测试 ok 
+``` 
+api:/api/data/getDownLoadData      
+method： get       
+参数：begin | end | count        
+参数说明:           
+count > 0:返回 count 天数数据          
+count < 0: 返回 begin-end 之间的数据          
+返回值： code   message   data             
+```  
+
+
+####  mock 订单日交易额数据情况    测试 ok 
+``` 
+api:/api/data/getTradingData      
+method： get       
+参数：begin | end | count        
+参数说明:           
+count > 0:返回 count 天数数据          
+count < 0: 返回 begin-end 之间的数据          
+返回值： code   message   data             
+```  
+
+
+####  mock 应用商城下载分布    测试 ok 
+``` 
+api:/api/data/getApplicationData      
+method： get       
+参数：null                  
+返回值： code   message   data             
+```  
+
+
 
